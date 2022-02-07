@@ -1,6 +1,6 @@
 ﻿using System.Runtime.InteropServices;
 
-namespace NGWP.PostBuildProcessor.Interop
+namespace NgWP.ThemeBuilder.Interop
 {
     internal class InteropHelper
     {

@@ -1,9 +1,8 @@
 ﻿// See https://aka.ms/new-console-template for more information
-// Console.WriteLine(args);
 
 using HtmlAgilityPack;
-using NGWP.PostBuildProcessor.Interop;
-using NGWP.PostBuildProcessor.WordPress;
+using NgWP.ThemeBuilder.Interop;
+using NgWP.ThemeBuilder.WordPress;
 
 InteropHelper.HideConsole();
 

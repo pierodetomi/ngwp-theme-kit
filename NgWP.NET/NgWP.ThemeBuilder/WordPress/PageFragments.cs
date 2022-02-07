@@ -1,4 +1,4 @@
-﻿namespace NGWP.PostBuildProcessor.WordPress
+﻿namespace NgWP.ThemeBuilder.WordPress
 {
     public class PageFragments
     {
@@ -13,6 +13,7 @@
     }
 
     $baseUrl = esc_url( get_template_directory_uri() );
+    $siteUrl = esc_url( site_url() );
 ?>
 ";
 
@@ -37,16 +38,13 @@ WP-NG Theme is distributed under the terms of the GNU GPL.
 */
 ";
 
-//        public const string WPVariables = @"
-//<script type=""text/javascript"">
-//    window._wpVariables = {
-//        isSingular: <?php echo is_singular(); ?>,
-//        isArchive: <?php echo is_archive(); ?>,
-//        isHome: <?php echo is_home(); ?>,
-//        isSearch: <?php echo is_search(); ?>
-//    };
-//</script>
-//";
+        public const string WPVariables = @"
+<script type=""text/javascript"">
+    window._wpVariables = {
+        siteUrl: '<?php echo $siteUrl; ?>',
+    };
+</script>
+";
 
         public const string ScriptBaseUrl = "<?php echo $baseUrl; ?>/";
     }

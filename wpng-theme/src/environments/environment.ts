@@ -2,8 +2,13 @@
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+import { IWordPressVariables } from '../app/models/wordpress.variables';
+
 export const environment = {
-  production: false
+  production: false,
+  wpVariables: {
+    siteUrl: '/'
+  } as IWordPressVariables
 };
 
 /*

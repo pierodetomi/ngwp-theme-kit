@@ -8,7 +8,8 @@
     "build-prod": "ng build --prod --output-hashing none",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "process": "npm run build && cd .. && \"NGWP.PostBuildProcessor/NGWP.PostBuildProcessor/bin/Debug/net6.0/NGWP.PostBuildProcessor.exe\" wpng-theme/dist/wpng-theme"
+    "build-theme": "npm run build && cd .. && \"NgWP.NET/NgWP.ThemeBuilder/bin/Debug/net6.0/NgWP.ThemeBuilder.exe\" wpng-theme/dist/wpng-theme",
+    "build-theme-prod": "npm run build-prod && cd .. && \"NgWP.NET/NgWP.ThemeBuilder/bin/Debug/net6.0/NgWP.ThemeBuilder.exe\" wpng-theme/dist/wpng-theme"
   },
   "private": true,
   "dependencies": {
