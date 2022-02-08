@@ -4,8 +4,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --output-hashing none",
-    "build-prod": "ng build --prod --output-hashing none",
+    "build": "ng build",
+    "build-prod": "ng build --prod",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "build-theme": "npm run build && cd .. && \"NgWP.NET/NgWP.ThemeBuilder/bin/Debug/net6.0/NgWP.ThemeBuilder.exe\" ngwp-theme/dist/ngwp-theme",

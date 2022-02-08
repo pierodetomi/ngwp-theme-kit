@@ -14,12 +14,13 @@
 
     $baseUrl = esc_url( get_template_directory_uri() );
     $siteUrl = esc_url( site_url() );
+    $nonce = wp_create_nonce( 'wp_rest' );
 ?>
 ";
 
         public const string StyleStart = @"
 /*
-Theme Name: {{templateName}}
+Theme Name: {{themeName}}
 Theme URI: https://github.com/tbd/
 Author: Piero De Tomi
 Author URI: https://pierodetomi.it/
@@ -42,6 +43,7 @@ WP-NG Theme is distributed under the terms of the GNU GPL.
 <script type=""text/javascript"">
     window._wpVariables = {
         siteUrl: '<?php echo $siteUrl; ?>',
+        api: { nonce: '<?php echo $nonce; ?>' }
     };
 </script>
 ";
