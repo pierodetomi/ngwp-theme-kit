@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "wpng-theme": {
+    "ngwp-theme": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -20,7 +20,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/wpng-theme",
+            "outputPath": "dist/ngwp-theme",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -72,10 +72,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "wpng-theme:build:production"
+              "browserTarget": "ngwp-theme:build:production"
             },
             "development": {
-              "browserTarget": "wpng-theme:build:development"
+              "browserTarget": "ngwp-theme:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -83,7 +83,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "wpng-theme:build"
+            "browserTarget": "ngwp-theme:build"
           }
         },
         "test": {
@@ -107,5 +107,5 @@
       }
     }
   },
-  "defaultProject": "wpng-theme"
+  "defaultProject": "ngwp-theme"
 }

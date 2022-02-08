@@ -1,5 +1,5 @@
 {
-  "name": "wpng-theme",
+  "name": "ngwp-theme",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -8,8 +8,8 @@
     "build-prod": "ng build --prod --output-hashing none",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "build-theme": "npm run build && cd .. && \"NgWP.NET/NgWP.ThemeBuilder/bin/Debug/net6.0/NgWP.ThemeBuilder.exe\" wpng-theme/dist/wpng-theme",
-    "build-theme-prod": "npm run build-prod && cd .. && \"NgWP.NET/NgWP.ThemeBuilder/bin/Debug/net6.0/NgWP.ThemeBuilder.exe\" wpng-theme/dist/wpng-theme"
+    "build-theme": "npm run build && cd .. && \"NgWP.NET/NgWP.ThemeBuilder/bin/Debug/net6.0/NgWP.ThemeBuilder.exe\" ngwp-theme/dist/ngwp-theme",
+    "build-theme-prod": "npm run build-prod && cd .. && \"NgWP.NET/NgWP.ThemeBuilder/bin/Debug/net6.0/NgWP.ThemeBuilder.exe\" ngwp-theme/dist/ngwp-theme"
   },
   "private": true,
   "dependencies": {
