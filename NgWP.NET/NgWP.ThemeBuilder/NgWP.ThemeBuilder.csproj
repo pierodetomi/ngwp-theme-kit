@@ -21,4 +21,8 @@
     <PackageReference Include="HtmlAgilityPack" Version="1.11.42" />
   </ItemGroup>
 
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="xcopy /s $(TargetDir) $(TargetDir)\..\..\..\..\..\library\bin\" />
+  </Target>
+
 </Project>
