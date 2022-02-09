@@ -20,10 +20,10 @@ export class HomeComponent implements OnInit {
         this.posts = posts;
       });
 
-    this._settingsService
-      .get()
-      .subscribe((settings) => {
-        this.settings = settings;
-      });
+    // this._settingsService
+    //   .get()
+    //   .subscribe((settings) => {
+    //     this.settings = settings;
+    //   });
   }
 }

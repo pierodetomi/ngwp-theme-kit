@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { TestComponent } from './components/test/test.component';
+import { NgwpThemeKitModule } from 'ngwp-theme-kit';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { TestComponent } from './components/test/test.component';
   imports: [
     BrowserModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgwpThemeKitModule
   ],
   providers: [],
   bootstrap: [AppComponent]
