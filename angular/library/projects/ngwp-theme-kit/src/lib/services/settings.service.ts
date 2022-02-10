@@ -8,8 +8,8 @@ import { WpConfigurationService } from './wp-configuration.service';
   providedIn: 'root'
 })
 export class SettingsService extends BaseService {
-  private get _baseUrl(): string {
-    return `${this.siteUrl}/wp-json/wp/v2/settings`;
+  public get endpointPath(): string {
+    return '/wp-json/wp/v2/settings';
   }
 
   constructor(private _http: HttpClient, wpConfigurationService: WpConfigurationService) {
@@ -17,7 +17,7 @@ export class SettingsService extends BaseService {
   }
 
   public get(): Observable<any> {
-    const url = this._baseUrl;
+    const url = this.baseUrl;
     return this._http.get(url);
   }
 }

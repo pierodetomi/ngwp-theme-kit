@@ -1,7 +1,7 @@
-import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from "@angular/common/http";
-import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
-import { WpConfigurationService } from "../services/wp-configuration.service";
+import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { WpConfigurationService } from '../services/wp-configuration.service';
 
 @Injectable()
 export class WpNonceInterceptor implements HttpInterceptor {

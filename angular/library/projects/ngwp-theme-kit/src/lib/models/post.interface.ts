@@ -50,15 +50,15 @@ export interface IPost {
       embeddable: boolean;
       href: string
     }>;
-    "version-history": Array<
+    'version-history': Array<
       {
         href: string
       }>;
-    "wp:attachment": Array<
+    'wp:attachment': Array<
       {
         href: string
       }>;
-    "wp:term": Array<{
+    'wp:term': Array<{
       taxonomy: string;
       embeddable: boolean;
       href: string;

@@ -1,8 +1,8 @@
-import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from "@angular/common/http";
-import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
-import { tap } from "rxjs/operators";
-import { WpConfigurationService } from "../services/wp-configuration.service";
+import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
+import { WpConfigurationService } from '../services/wp-configuration.service';
 
 @Injectable()
 export class WpUnauthorizedInterceptor implements HttpInterceptor {
@@ -16,7 +16,7 @@ export class WpUnauthorizedInterceptor implements HttpInterceptor {
             return;
           }
 
-          const redirectUrl = encodeURIComponent(window.location.href)
+          const redirectUrl = encodeURIComponent(window.location.href);
           window.location.href = `${this._wpConfigurationService.configuration.siteUrl}/wp-login.php?redirect_to=${redirectUrl}`;
         }
       }));
