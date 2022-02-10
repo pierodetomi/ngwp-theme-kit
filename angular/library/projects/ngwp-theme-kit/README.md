@@ -1,6 +1,6 @@
 # NgwpThemeKit
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.1.0.
+This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.2.0.
 
 ## Code scaffolding
 

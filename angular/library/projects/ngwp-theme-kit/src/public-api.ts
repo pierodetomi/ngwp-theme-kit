@@ -2,8 +2,6 @@
  * Public API Surface of ngwp-theme-kit
  */
 
-export * from './lib/ngwp-theme-kit.service';
-export * from './lib/ngwp-theme-kit.component';
 export * from './lib/ngwp-theme-kit.module';
 
 // Models
