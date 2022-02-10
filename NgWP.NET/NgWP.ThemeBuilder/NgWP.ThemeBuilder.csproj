@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="xcopy /s $(TargetDir) $(TargetDir)\..\..\..\..\..\library\bin\" />
+    <Exec Command="rmdir /s /q $(TargetDir)..\..\..\..\..\library\bin&#xD;&#xA;xcopy /s $(TargetDir) $(TargetDir)..\..\..\..\..\library\bin\" />
   </Target>
 
 </Project>

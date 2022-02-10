@@ -1,8 +1,15 @@
-﻿namespace NgWP.ThemeBuilder.WordPress
+﻿namespace NgWP.ThemeBuilder
 {
-    public class PageFragments
+    public static class Constants
     {
-        public const string PageStart = @"
+        public static class Paths
+        {
+            public const string IndexStart = "Resources/index-start.php";
+        }
+
+        public static class PageFragments
+        {
+            public const string PageStart = @"
 <?php
     /**
      * @package NgWP
@@ -18,7 +25,7 @@
 ?>
 ";
 
-        public const string StyleStart = @"
+            public const string StyleStart = @"
 /*
 Theme Name: {{themeName}}
 Theme URI: https://github.com/tbd/
@@ -39,7 +46,7 @@ WP-NG Theme is distributed under the terms of the GNU GPL.
 */
 ";
 
-        public const string WPVariables = @"
+            public const string WPVariables = @"
 <script type=""text/javascript"">
     window._wpVariables = {
         siteUrl: '<?php echo $siteUrl; ?>',
@@ -48,6 +55,7 @@ WP-NG Theme is distributed under the terms of the GNU GPL.
 </script>
 ";
 
-        public const string ScriptBaseUrl = "<?php echo $baseUrl; ?>/";
+            public const string ScriptBaseUrl = "<?php echo $baseUrl; ?>/";
+        }
     }
 }
