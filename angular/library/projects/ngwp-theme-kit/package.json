@@ -1,11 +1,26 @@
 {
   "name": "ngwp-theme-kit",
-  "version": "0.0.1",
+  "version": "0.0.6",
+  "description": "NgWP Theme Kit is an Angular library that enables the creation of WordPress themes using Angular. It follows the principle of headless cms, using the WordPress REST APIs.",
+  "homepage": "https://github.com/pierodetomi/ngwp-theme-kit",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pierodetomi/ngwp-theme-kit.git"
+  },
   "peerDependencies": {
     "@angular/common": "^13.2.0",
     "@angular/core": "^13.2.0"
   },
   "dependencies": {
     "tslib": "^2.3.0"
-  }
+  },
+  "keywords": [
+    "github",
+    "repos",
+    "repositories",
+    "sort",
+    "stars"
+  ],
+  "author": "Piero De Tomi <pierodetomi@gmail.com>",
+  "license": "MIT"
 }

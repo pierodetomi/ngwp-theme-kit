@@ -1,24 +1,81 @@
-# NgwpThemeKit
+**NgWP Theme Kit** is an Angular library that enables the creation of **WordPress** themes using **Angular**.
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.2.0.
+It follows the principle of _headless cms_, using the **WordPress REST APIs**.
 
-## Code scaffolding
+# Getting Started
 
-Run `ng generate component component-name --project ngwp-theme-kit` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project ngwp-theme-kit`.
-> Note: Don't forget to add `--project ngwp-theme-kit` or else it will be added to the default project in your `angular.json` file. 
+## Prerequisites
+In order to make use of this module you need (of course) an Angular application.
+Therefore you should create an app (if you hadn't already):
 
-## Build
+```bash
+$ ng new my-app --routing
+```
 
-Run `ng build ngwp-theme-kit` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Installing the library
+You can install **NgWP Theme Kit** with **npm**:
 
-## Publishing
+```bash
+$ npm i ngwp-theme-kit
+```
 
-After building your library with `ng build ngwp-theme-kit`, go to the dist folder `cd dist/ngwp-theme-kit` and run `npm publish`.
+## Importing the Angular module
+Now you must import the ```NgwpThemeKitModule``` in your main module (usually ```app.module.ts```).
 
-## Running unit tests
+An example:
 
-Run `ng test ngwp-theme-kit` to execute the unit tests via [Karma](https://karma-runner.github.io).
+```js
+...
 
-## Further help
+import { NgwpThemeKitModule } from 'ngwp-theme-kit';
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+...
+
+@NgModule({
+  ...
+  imports: [
+    ...
+
+    NgwpThemeKitModule
+
+    ...
+  ],
+  ...
+})
+```
+
+# Adding build scripts to package.json
+The last step is to modify the ```package.json``` file in order to add the scripts that will bundle up your WordPress theme.
+
+Add the following scripts to the ```package.json``` file inside your Angular project:
+
+```json
+{
+  ...
+
+  "scripts": {
+    ...
+
+    "build-theme": "ng build && \"./node_modules/ngwp-theme-kit/bin/NgWP.ThemeBuilder.exe\" {{dist-path}}",
+    "build-theme-prod": "ng build --prod && \"./node_modules/ngwp-theme-kit/bin/NgWP.ThemeBuilder.exe\" {{dist-path}}"
+
+    ...
+  }
+
+  ...
+}
+```
+
+Here you'll have to replace the ```{{dist-path}}``` token with your actual application's dist path (usually ```dist/<application name>```).
+
+## Develop the theme
+TODO
+
+## Build the theme package
+TODO
+
+## Install in WordPress
+TODO
+
+## See your theme in action
+TODO

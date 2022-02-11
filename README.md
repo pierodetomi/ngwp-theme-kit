@@ -1,4 +1,4 @@
-**NgWP Theme Kit** is an Angular module that enables the creation of **WordPress** themes using **Angular**.
+**NgWP Theme Kit** is an Angular library that enables the creation of **WordPress** themes using **Angular**.
 
 It follows the principle of _headless cms_, using the **WordPress REST APIs**.
 
