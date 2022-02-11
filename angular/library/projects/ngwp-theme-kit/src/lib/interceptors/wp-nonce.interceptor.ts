@@ -8,14 +8,14 @@ export class WpNonceInterceptor implements HttpInterceptor {
   constructor(private _wpConfigurationService: WpConfigurationService) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const apiConfig = this._wpConfigurationService.configuration.api;
+    const authConfig = this._wpConfigurationService.configuration.auth;
 
-    if (!apiConfig || !apiConfig?.nonce) {
+    if (authConfig?.isAuthenticated) {
       return next.handle(req);
     }
 
     const authenticatedRequest = req.clone({
-      headers: req.headers.append('X-WP-Nonce', apiConfig.nonce)
+      headers: req.headers.append('X-WP-Nonce', authConfig.nonce)
     });
 
     return next.handle(authenticatedRequest);

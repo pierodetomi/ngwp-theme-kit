@@ -22,6 +22,7 @@
     $baseUrl = esc_url( get_template_directory_uri() );
     $siteUrl = esc_url( site_url() );
     $nonce = wp_create_nonce( 'wp_rest' );
+    $user_id = get_current_user_id();
 ?>
 ";
 
@@ -48,9 +49,13 @@ WP-NG Theme is distributed under the terms of the GNU GPL.
 
             public const string WPVariables = @"
 <script type=""text/javascript"">
-    window._wpVariables = {
+    window._wpConfiguration = {
         siteUrl: '<?php echo $siteUrl; ?>',
-        api: { nonce: '<?php echo $nonce; ?>' }
+        auth: {
+            isAuthenticated: <?php echo is_user_logged_in(); ?>,
+            userId: <?php echo $user_id; ?>,
+            nonce: '<?php echo $nonce; ?>'
+        }
     };
 </script>
 ";

@@ -4,13 +4,16 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { AppModule } from './app/app.module';
 import { environment } from './environments/environment';
 
-(window as any)._wpConfiguration = {
-  siteUrl: 'http://elementortest.local',
-  api: { nonce: '' }
-};
-
 if (environment.production) {
   enableProdMode();
+  
+} else {
+  // Local testing mode
+  (window as any)._wpConfiguration = {
+    siteUrl: 'http://wpdev.local',
+    api: { nonce: '' },
+    demo: true
+  };
 }
 
 platformBrowserDynamic().bootstrapModule(AppModule)

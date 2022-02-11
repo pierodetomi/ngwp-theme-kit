@@ -19,7 +19,7 @@
     "@angular/platform-browser": "~13.2.0",
     "@angular/platform-browser-dynamic": "~13.2.0",
     "@angular/router": "~13.2.0",
-    "ngwp-theme-kit": "file:../library/dist/ngwp-theme-kit/ngwp-theme-kit-0.0.5.tgz",
+    "ngwp-theme-kit": "file:../library/dist/ngwp-theme-kit/ngwp-theme-kit-0.0.6.tgz",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"

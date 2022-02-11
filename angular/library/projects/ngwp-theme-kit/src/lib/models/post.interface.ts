@@ -29,44 +29,42 @@ export interface IPost {
   sticky: boolean;
   template: string;
   format: string;
-  meta: Array<any>;
-  categories: Array<number>;
-  tags: Array<string>;
+  meta: any[];
+  categories: number[];
+  tags: string[];
   _links: {
-    self: Array<{
+    self: {
       href: string
-    }>;
-    collection: Array<{
+    }[];
+    collection: {
       href: string
-    }>;
-    about: Array<{
+    }[];
+    about: {
       href: string
-    }>;
-    author: Array<{
+    }[];
+    author: {
       embeddable: boolean;
       href: string
-    }>;
-    replies: Array<{
+    }[];
+    replies: {
       embeddable: boolean;
       href: string
-    }>;
-    'version-history': Array<
-      {
-        href: string
-      }>;
-    'wp:attachment': Array<
-      {
-        href: string
-      }>;
-    'wp:term': Array<{
+    }[];
+    'version-history': {
+      href: string
+    }[];
+    'wp:attachment': {
+      href: string
+    }[];
+    'wp:term': {
       taxonomy: string;
       embeddable: boolean;
       href: string;
-    }>;
-    curies: Array<{
+    }[];
+    curies: {
       name: string;
       href: string;
       templated: boolean;
-    }>;
+    }[];
   };
 }

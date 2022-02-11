@@ -1,6 +1,8 @@
 export interface IWpConfiguration {
   siteUrl: string;
-  api: {
-    nonce: string;
+  auth: {
+    isAuthenticated: boolean,
+    userId: number,
+    nonce: string
   };
 }
