@@ -10,7 +10,7 @@ if (environment.production) {
 } else {
   // Local testing mode
   (window as any)._wpConfiguration = {
-    siteUrl: 'http://wpdev.local',
+    siteUrl: 'http://wpdev03.local',
     api: { nonce: '' },
     demo: true
   };

@@ -1,4 +1,5 @@
 ﻿using HtmlAgilityPack;
+using Newtonsoft.Json;
 using NgWP.ThemeBuilder.Models;
 using NgWP.ThemeBuilder.Scopes;
 using System.Reflection;
@@ -7,6 +8,8 @@ namespace NgWP.ThemeBuilder
 {
     public class Theme
     {
+        private ThemeConfiguration _configuration;
+
         private string _executionPath;
         
         private string _ngIndexFilePath;
@@ -17,8 +20,6 @@ namespace NgWP.ThemeBuilder
         
         private string _wpIndexFileName;
         
-        public string ThemeName { get; private set; } = "NgWP Theme";
-
         public string ExecutionPath
         {
             get
@@ -35,17 +36,21 @@ namespace NgWP.ThemeBuilder
 
         public void Build(BuildThemeParameters parameters)
         {
-            using var scope = new ConsoleHiddenScope();
+            // using var scope = new ConsoleHiddenScope();
 
             if (!CheckInputParameters(parameters))
                 return;
 
-            TryGetThemeNameFromInput();
+            ReadSettings(parameters.ThemeSettingsFile);
             InitializeFilePaths(parameters);
 
             ProcessIndexPage(parameters);
             ProcessStyles(parameters);
-            AddThemeScreenshot(parameters);
+
+            var functions = new ThemeFunctions(_configuration);
+            functions.Build(parameters.DistPath);
+
+            CopyStaticFiles(parameters);
             CleanupSource();
         }
 
@@ -66,25 +71,33 @@ namespace NgWP.ThemeBuilder
                 return false;
             }
 
+            if (parameters.ThemeSettingsFile == null)
+            {
+                Console.WriteLine($"Theme settings file parameter not provided!");
+                Console.WriteLine();
+
+                return false;
+            }
+            else if (!File.Exists(parameters.ThemeSettingsFile))
+            {
+                Console.WriteLine($"Theme settings file \"{parameters.ThemeSettingsFile}\" does not exits. Please check that it's correct and retry.");
+                Console.WriteLine();
+
+                return false;
+            }
+
             return true;
         }
 
-        private void TryGetThemeNameFromInput()
+        private void ReadSettings(string themeSettingsFile)
         {
-            Console.WriteLine();
-            Console.Write("Theme name: ");
-
-            var input = Console.ReadLine();
-
-            if (!string.IsNullOrWhiteSpace(input))
-                ThemeName = input;
-
-            Console.WriteLine();
+            string settingsJson = File.ReadAllText(themeSettingsFile);
+            _configuration = JsonConvert.DeserializeObject<ThemeConfiguration>(settingsJson);
         }
 
         private void InitializeFilePaths(BuildThemeParameters parameters)
         {
-            var distFiles = Directory.GetFiles(parameters.DistPath!);
+            var distFiles = Directory.GetFiles(parameters.DistPath);
 
             _ngIndexFilePath = distFiles.First(_ => _.EndsWith("index.html"));
 
@@ -145,18 +158,35 @@ namespace NgWP.ThemeBuilder
 
             var style = File.ReadAllText(wpStyleFileName);
             
-            style = style.Insert(0, Constants.PageFragments.StyleStart);
-            style = style.Replace("{{themeName}}", ThemeName);
-            
+            style = style
+                .Insert(0, Constants.PageFragments.StyleStart)
+                .Replace("{{name}}", _configuration.Name)
+                .Replace("{{description}}", _configuration.Description)
+                .Replace("{{author}}", _configuration.Author)
+                .Replace("{{year}}", DateTime.Today.Year.ToString());
+
             File.WriteAllText(wpStyleFileName, style);
         }
 
-        private void AddThemeScreenshot(BuildThemeParameters parameters)
+        private void CopyStaticFiles(BuildThemeParameters parameters)
         {
-            var themeScreenshotResourceFileName = Path.Combine(ExecutionPath, "Resources/screenshot.png");
-            var wpThemeScreenshotFileName = Path.Combine(parameters.DistPath!, "screenshot.png");
+            var staticFilesPath = Path.Combine(ExecutionPath, "Resources");
+            CopyFilesRecursively(staticFilesPath, parameters.DistPath);
+        }
 
-            File.Copy(themeScreenshotResourceFileName, wpThemeScreenshotFileName);
+        private static void CopyFilesRecursively(string sourcePath, string targetPath)
+        {
+            //Now Create all of the directories
+            foreach (string dirPath in Directory.GetDirectories(sourcePath, "*", SearchOption.AllDirectories))
+            {
+                Directory.CreateDirectory(dirPath.Replace(sourcePath, targetPath));
+            }
+
+            //Copy all the files & Replaces any files with the same name
+            foreach (string newPath in Directory.GetFiles(sourcePath, "*.*", SearchOption.AllDirectories))
+            {
+                File.Copy(newPath, newPath.Replace(sourcePath, targetPath), true);
+            }
         }
 
         private void CleanupSource()

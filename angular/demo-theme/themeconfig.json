@@ -1,0 +1,27 @@
+{
+  "name": "Demo Theme",
+  "description": "A WordPress template developed with Angular frontend",
+  "author": "Piero De Tomi",
+  "themeFeatures": [
+    "title-tag",
+    "post-thumbnails"
+  ],
+  "sections": [{
+    "id": "main",
+    "name": "Main Config",
+    "description": "Main configuration parameters",
+    "settings": [{
+      "id": "title",
+      "label": "Title",
+      "description": "The title of this blog",
+      "defaultValue": null,
+      "controlType": "text"
+    },{
+      "id": "author",
+      "label": "Author",
+      "description": "The author of this blog",
+      "defaultValue": null,
+      "controlType": "text"
+    }]
+  }]
+}

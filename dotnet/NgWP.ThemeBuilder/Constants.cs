@@ -28,11 +28,11 @@
 
             public const string StyleStart = @"
 /*
-Theme Name: {{themeName}}
+Theme Name: {{name}}
 Theme URI: https://github.com/tbd/
-Author: Piero De Tomi
+Author: {{author}}
 Author URI: https://pierodetomi.it/
-Description: WordPress template developed with Angular frontend
+Description: {{description}}
 Requires at least: 5.9
 Tested up to: 5.9
 Requires PHP: 5.6
@@ -42,8 +42,8 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: wpngtheme
 Tags: angular
 
-WP-NG Theme WordPress Theme, (C) 2022 Piero De Tomi
-WP-NG Theme is distributed under the terms of the GNU GPL.
+{{name}} WordPress Theme, (C) {{year}} {{author}}
+{{name}} is distributed under the terms of the GNU GPL.
 */
 ";
 
@@ -61,6 +61,18 @@ WP-NG Theme is distributed under the terms of the GNU GPL.
 ";
 
             public const string ScriptBaseUrl = "<?php echo $baseUrl; ?>/";
+
+            public const string FunctionsStart = @"
+<?php
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+} // Exit if accessed directly
+
+require_once(""inc/helpers/theme-helper.php"");
+
+add_action(""customize_register"", ""configure_customizer"");
+";
         }
     }
 }

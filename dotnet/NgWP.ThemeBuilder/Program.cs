@@ -5,7 +5,10 @@ using NgWP.ThemeBuilder.Models;
 
 var parameters = new BuildThemeParameters
 {
-    DistPath = args[0] // "../../../../../ngwp-theme/dist/ngwp-theme"
+    DistPath = args[0],
+    ThemeSettingsFile = args[1]
+    //DistPath = "../../../../../angular/demo-theme/dist/demo-theme",
+    //ThemeSettingsFile = "../../../../../angular/demo-theme/themeconfig.json"
 };
 
 var theme = new Theme();

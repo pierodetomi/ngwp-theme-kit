@@ -1,24 +1,54 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
+    <Nullable>disable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\inc\helpers\theme-helper.php" />
     <None Remove="Resources\screenshot.png" />
+    <None Remove="Templates\add-img-setting-entry.php" />
+    <None Remove="Templates\add-section-entry.php" />
+    <None Remove="Templates\add-setting-entry.php" />
+    <None Remove="Templates\add-txt-setting-entry.php" />
+    <None Remove="Templates\functions.php" />
+    <None Remove="Templates\functions\add-theme-feature-entry.php" />
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Program.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Resources\inc\helpers\theme-helper.php">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\screenshot.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Templates\functions\add-theme-feature-entry.php" />
+    <EmbeddedResource Include="Templates\functions\add-txt-setting-entry.php" />
+    <EmbeddedResource Include="Templates\functions\add-img-setting-entry.php" />
+    <EmbeddedResource Include="Templates\functions\add-setting-entry.php" />
+    <EmbeddedResource Include="Templates\functions\add-section-entry.php" />
+    <EmbeddedResource Include="Templates\functions\functions.php" />
+    <EmbeddedResource Include="Theme.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="HtmlAgilityPack" Version="1.11.42" />
+    <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="6.0.2" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Constants.cs" />
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
