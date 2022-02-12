@@ -10,7 +10,7 @@ export class WpNonceInterceptor implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const authConfig = this._wpConfigurationService.configuration.auth;
 
-    if (authConfig?.isAuthenticated) {
+    if (!authConfig?.isAuthenticated) {
       return next.handle(req);
     }
 

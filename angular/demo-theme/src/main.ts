@@ -6,12 +6,16 @@ import { environment } from './environments/environment';
 
 if (environment.production) {
   enableProdMode();
-  
+
 } else {
   // Local testing mode
   (window as any)._wpConfiguration = {
     siteUrl: 'http://wpdev03.local',
-    api: { nonce: '' },
+    auth: {
+      isAuthenticated: false,
+      userId: 0,
+      nonce: ''
+    },
     demo: true
   };
 }
