@@ -12,14 +12,6 @@ namespace NgWP.ThemeBuilder
 
         private string _executionPath;
         
-        private string _ngIndexFilePath;
-        
-        private string _ngStylesFilePath;
-        
-        private string _ngStylesFileName;
-        
-        private string _wpIndexFileName;
-        
         public string ExecutionPath
         {
             get
@@ -42,16 +34,17 @@ namespace NgWP.ThemeBuilder
                 return;
 
             ReadSettings(parameters.ThemeSettingsFile);
-            InitializeFilePaths(parameters);
 
-            ProcessIndexPage(parameters);
-            ProcessStyles(parameters);
+            var index = new ThemeIndexBuilder(_configuration);
+            index.Build(parameters.DistPath);
 
-            var functions = new ThemeFunctions(_configuration);
+            var style = new ThemeStyleBuilder(_configuration);
+            style.Build(parameters.DistPath);
+
+            var functions = new ThemeFunctionsBuilder(_configuration);
             functions.Build(parameters.DistPath);
 
             CopyStaticFiles(parameters);
-            CleanupSource();
         }
 
         private bool CheckInputParameters(BuildThemeParameters parameters)
@@ -95,79 +88,6 @@ namespace NgWP.ThemeBuilder
             _configuration = JsonConvert.DeserializeObject<ThemeConfiguration>(settingsJson);
         }
 
-        private void InitializeFilePaths(BuildThemeParameters parameters)
-        {
-            var distFiles = Directory.GetFiles(parameters.DistPath);
-
-            _ngIndexFilePath = distFiles.First(_ => _.EndsWith("index.html"));
-
-            _ngStylesFilePath = distFiles.First(_ => _.Contains("styles") && _.EndsWith(".css"));
-            _ngStylesFileName = Path.GetFileName(_ngStylesFilePath);
-
-            _wpIndexFileName = Path.Combine(parameters.DistPath!, "index.php");
-        }
-
-        private void ProcessIndexPage(BuildThemeParameters parameters)
-        {
-            var indexHtml = File.ReadAllText(_ngIndexFilePath);
-
-            var html = new HtmlDocument();
-            html.LoadHtml(indexHtml);
-
-            var head = html.DocumentNode.ChildNodes.FindFirst("head");
-            var body = html.DocumentNode.ChildNodes.FindFirst("body");
-
-            // Add WP head PHP directive
-            var wpHeadNode = HtmlNode.CreateNode("<?php wp_head(); ?>");
-            head.AppendChild(wpHeadNode);
-
-            // Remove stylesheet reference (will be automatically applied by WordPress)
-            var stylesLinkNode = head.ChildNodes.First(_ => _.Name == "link" && _.GetAttributeValue("href", string.Empty) == _ngStylesFileName);
-            stylesLinkNode.Remove();
-            
-            // Add base url to (existing) scripts
-            var scriptNodes = body.ChildNodes.Where(_ => _.Name == "script");
-
-            foreach (var scriptNode in scriptNodes)
-                scriptNode.SetAttributeValue("src", $"{Constants.PageFragments.ScriptBaseUrl}{scriptNode.GetAttributeValue("src", string.Empty)}");
-
-            // Add WP variables script
-            var wpVariablesScriptNode = HtmlNode.CreateNode(Constants.PageFragments.WPVariables);
-            var firstScript = body.ChildNodes.FindFirst("script");
-            body.ChildNodes.Insert(body.ChildNodes.IndexOf(firstScript), wpVariablesScriptNode);
-
-            // Add WP footer PHP directive
-            var wpFooterNode = HtmlNode.CreateNode("<?php wp_footer(); ?>");
-            body.AppendChild(wpFooterNode);
-
-            var finalHtml = html.DocumentNode.WriteTo();
-
-            // Add PHP page start
-            finalHtml = finalHtml.Insert(0, Constants.PageFragments.PageStart);
-
-            // Add WP body style
-            finalHtml = finalHtml.Replace("<body ", "<body <?php body_class(); ?> ");
-
-            File.WriteAllText(_wpIndexFileName, finalHtml);
-        }
-
-        private void ProcessStyles(BuildThemeParameters parameters)
-        {
-            var wpStyleFileName = Path.Combine(parameters.DistPath!, "style.css");
-            File.Move(_ngStylesFilePath, wpStyleFileName);
-
-            var style = File.ReadAllText(wpStyleFileName);
-            
-            style = style
-                .Insert(0, Constants.PageFragments.StyleStart)
-                .Replace("{{name}}", _configuration.Name)
-                .Replace("{{description}}", _configuration.Description)
-                .Replace("{{author}}", _configuration.Author)
-                .Replace("{{year}}", DateTime.Today.Year.ToString());
-
-            File.WriteAllText(wpStyleFileName, style);
-        }
-
         private void CopyStaticFiles(BuildThemeParameters parameters)
         {
             var staticFilesPath = Path.Combine(ExecutionPath, "Resources");
@@ -187,13 +107,6 @@ namespace NgWP.ThemeBuilder
             {
                 File.Copy(newPath, newPath.Replace(sourcePath, targetPath), true);
             }
-        }
-
-        private void CleanupSource()
-        {
-            // Cleanup source files
-            File.Delete(_ngIndexFilePath);
-            File.Delete(_ngStylesFilePath);
         }
     }
 }

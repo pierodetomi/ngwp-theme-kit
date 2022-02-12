@@ -16,6 +16,9 @@
     <None Remove="Templates\add-txt-setting-entry.php" />
     <None Remove="Templates\functions.php" />
     <None Remove="Templates\functions\add-theme-feature-entry.php" />
+    <None Remove="Templates\index\index.php" />
+    <None Remove="Templates\index\script-src-entry.php" />
+    <None Remove="Templates\style\style.css" />
   </ItemGroup>
 
   <ItemGroup>
@@ -38,6 +41,9 @@
     <EmbeddedResource Include="Templates\functions\add-setting-entry.php" />
     <EmbeddedResource Include="Templates\functions\add-section-entry.php" />
     <EmbeddedResource Include="Templates\functions\functions.php" />
+    <EmbeddedResource Include="Templates\index\script-src-entry.php" />
+    <EmbeddedResource Include="Templates\index\index.php" />
+    <EmbeddedResource Include="Templates\style\style.css" />
     <EmbeddedResource Include="Theme.cs" />
   </ItemGroup>
 
@@ -45,10 +51,6 @@
     <PackageReference Include="HtmlAgilityPack" Version="1.11.42" />
     <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="6.0.2" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Resource Include="Constants.cs" />
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
