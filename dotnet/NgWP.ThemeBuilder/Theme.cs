@@ -1,7 +1,5 @@
-﻿using HtmlAgilityPack;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using NgWP.ThemeBuilder.Models;
-using NgWP.ThemeBuilder.Scopes;
 using System.Reflection;
 
 namespace NgWP.ThemeBuilder
