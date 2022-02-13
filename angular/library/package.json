@@ -11,7 +11,7 @@
     "create-dist-bin": "if not exist \"dist\\ngwp-theme-kit\\bin\\\" mkdir \"dist\\ngwp-theme-kit\\bin\\\"",
     "copy-bin-to-dist": "xcopy /s /Y \"bin\\\" \"dist\\ngwp-theme-kit\\bin\\\"",
     "build-npm": "npm run lint && ng build && npm run create-dist-bin && npm run copy-bin-to-dist",
-    "deploy-locally": "npm run lint && ng build && if not exist \"dist\\ngwp-theme-kit\\bin\\\" mkdir \"dist\\ngwp-theme-kit\\bin\\\" && xcopy /s /Y \"bin\\\" \"dist\\ngwp-theme-kit\\bin\\\" && cd \"dist/ngwp-theme-kit\" && npm pack && cd \"../../../demo-theme\" && npm i \"../library/dist/ngwp-theme-kit/ngwp-theme-kit-0.0.6.tgz\""
+    "deploy-locally": "npm run build-npm && cd \"dist/ngwp-theme-kit\" && npm pack && cd \"../../../demo-theme\" && npm i \"../library/dist/ngwp-theme-kit/ngwp-theme-kit-0.0.8.tgz\""
   },
   "private": true,
   "dependencies": {
