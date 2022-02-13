@@ -30,7 +30,7 @@ namespace NgWP.ThemeBuilder
 
             configuration.ThemeFeatures.ForEach(feature =>
             {
-                sectionsCode.Add(GetThemeFeatureEntryCode(feature));
+                featuresCode.Add(GetThemeFeatureEntryCode(feature));
             });
 
             configuration.Sections.ForEach(section =>
