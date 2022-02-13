@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IPost, PostService, SettingsService } from 'ngwp-theme-kit';
+import { IImageAttachment, IPost, PostService, ThemeSettingsService } from 'ngwp-theme-kit';
 
 @Component({
   selector: 'app-home',
@@ -7,23 +7,33 @@ import { IPost, PostService, SettingsService } from 'ngwp-theme-kit';
   styleUrls: ['./home.component.less']
 })
 export class HomeComponent implements OnInit {
+  public title = '';
+  
+  public logo: IImageAttachment = null;
+
   public posts: IPost[] = [];
 
   public settings: any = null;
 
-  constructor(private _postService: PostService, private _settingsService: SettingsService) { }
+  constructor(private _postService: PostService, private _themeSettingsService: ThemeSettingsService) { }
 
   ngOnInit(): void {
+    this._themeSettingsService
+      .get<string>('title')
+      .subscribe((title) => {
+        this.title = title;
+      });
+
+    this._themeSettingsService
+      .getImage('logo')
+      .subscribe((logo) => {
+        this.logo = logo;
+      });
+
     this._postService
       .get(1, 10)
       .subscribe((posts) => {
         this.posts = posts;
       });
-
-    // this._settingsService
-    //   .get()
-    //   .subscribe((settings) => {
-    //     this.settings = settings;
-    //   });
   }
 }

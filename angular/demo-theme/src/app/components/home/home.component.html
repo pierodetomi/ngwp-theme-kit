@@ -1,9 +1,16 @@
-<div *ngFor="let post of posts">
-  <h2>{{post.title.rendered}}</h2>
-</div>
+<p>Title:</p>
+<h1>{{title}}</h1>
 
-<pre>{{settings|json}}</pre>
+<p>Logo:</p>
+<img *ngIf="logo?.src" [src]="logo.src" />
+
+<p>Posts in this site:</p>
+<ul>
+  <li *ngFor="let post of posts">
+    {{post.title.rendered}}
+  </li>
+</ul>
 
 <div>
-  <a routerLink="test">TEST</a>
+  <a routerLink="test">Angular router test</a>
 </div>

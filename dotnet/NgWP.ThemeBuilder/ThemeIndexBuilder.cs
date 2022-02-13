@@ -47,6 +47,7 @@ namespace NgWP.ThemeBuilder
             var bodyCode = body.InnerHtml;
 
             return _indexTemplate
+                .Replace("{{theme-name}}", configuration.Name)
                 .Replace("{{head-code}}", headCode)
                 .Replace("{{body-code}}", bodyCode)
                 .Replace("{{scripts-code}}", string.Join(Environment.NewLine, updatedScripts));

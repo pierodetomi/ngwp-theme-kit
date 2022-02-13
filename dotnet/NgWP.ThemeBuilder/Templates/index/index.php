@@ -1,10 +1,46 @@
 ﻿<?php
     /**
-     * @package NgWP
+     * @package {{theme-name}}
      */
 
     if ( ! defined( 'ABSPATH' ) ) {
 	    exit; // Exit if accessed directly.
+    }
+
+    $is_get_request = $_SERVER["REQUEST_METHOD"] === "GET";
+    $is_ngwp_api_request = $is_get_request && isset($_GET["mode"]) && htmlspecialchars($_GET["mode"]) == "ngwp_api";
+
+    if ($is_ngwp_api_request) {
+        header('Content-Type: application/json; charset=utf-8');
+        
+        $method = htmlspecialchars($_GET["api_method"]);
+
+        switch ($method) {
+            case "get_setting":
+                $name = htmlspecialchars($_GET["name"]);
+                $default = htmlspecialchars($_GET["default"]) ?: null;
+                $setting = get_theme_mod($name, $default);
+
+                if (isset($_GET["type"]) && htmlspecialchars($_GET["type"]) == "img") {
+                    $attachment_id = $setting;
+                    $size = htmlspecialchars($_GET["size"]) ?: "thumbnail";
+                    $icon = htmlspecialchars($_GET["icon"]) ?: false;
+                    
+                    $setting = wp_get_attachment_image_src($attachment_id, $size, $icon);
+                }
+                
+                $json = new stdclass();
+                $json->setting = $setting;
+                break;
+
+            default:
+                http_response_code(404);
+                exit;
+        }
+        
+        http_response_code(200);
+        echo json_encode($json);
+        exit;
     }
 
     $baseUrl = esc_url( get_template_directory_uri() );

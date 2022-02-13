@@ -22,6 +22,12 @@
       "description": "The author of this blog",
       "defaultValue": null,
       "controlType": "text"
+    },{
+      "id": "logo",
+      "label": "Logo",
+      "description": "The website logo",
+      "defaultValue": null,
+      "controlType": "image"
     }]
   }]
 }
