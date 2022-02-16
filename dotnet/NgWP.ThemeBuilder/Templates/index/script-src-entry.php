@@ -1,1 +1,1 @@
-﻿<?php echo $baseUrl; ?>/{{originalSrc}}
+<?php echo $baseUrl; ?>/{{originalSrc}}

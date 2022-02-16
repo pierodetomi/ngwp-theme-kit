@@ -1,1 +1,1 @@
-﻿add_theme_support("{{feature}}");
+add_theme_support("{{feature}}");

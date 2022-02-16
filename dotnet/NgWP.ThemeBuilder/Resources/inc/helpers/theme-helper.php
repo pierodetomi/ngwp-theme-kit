@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 class ThemeHelper {
     public static function add_section($wp_customize, $section_id, $title, $description) {

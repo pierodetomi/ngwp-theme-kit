@@ -1,1 +1,1 @@
-﻿ThemeHelper::add_setting($wp_customize, "{{id}}", "{{section-id}}", "{{label}}", "{{description}}", "{{default-value}}", null, "{{control-type}}");
+ThemeHelper::add_setting($wp_customize, "{{id}}", "{{section-id}}", "{{label}}", "{{description}}", "{{default-value}}", null, "{{control-type}}");

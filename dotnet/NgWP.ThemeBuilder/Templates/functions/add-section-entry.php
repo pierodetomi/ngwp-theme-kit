@@ -1,1 +1,1 @@
-﻿ThemeHelper::add_section($wp_customize, "{{id}}", "{{name}}", "{{description}}");
+ThemeHelper::add_section($wp_customize, "{{id}}", "{{name}}", "{{description}}");

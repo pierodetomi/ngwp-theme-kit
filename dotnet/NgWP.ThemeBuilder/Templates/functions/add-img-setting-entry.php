@@ -1,1 +1,1 @@
-﻿ThemeHelper::add_setting_img($wp_customize, "{{id}}", "{{section-id}}", "{{label}}", "{{description}}");
+ThemeHelper::add_setting_img($wp_customize, "{{id}}", "{{section-id}}", "{{label}}", "{{description}}");

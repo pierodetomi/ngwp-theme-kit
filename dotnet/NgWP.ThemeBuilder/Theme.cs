@@ -42,6 +42,9 @@ namespace NgWP.ThemeBuilder
             var functions = new ThemeFunctionsBuilder(_configuration);
             functions.Build(parameters.DistPath);
 
+            var options = new ThemeOptionsBuilder(_configuration);
+            options.Build(parameters.DistPath);
+
             CopyStaticFiles(parameters);
         }
 

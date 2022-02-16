@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 if (!function_exists("getallheaders"))
 {
@@ -14,7 +14,7 @@ if (!function_exists("getallheaders"))
     }
 }
 
-function try_ead_nonce_from_headers() {
+function try_read_nonce_from_headers() {
     $nonce = null;
     $headers = array_change_key_case(getallheaders(), CASE_LOWER);
         

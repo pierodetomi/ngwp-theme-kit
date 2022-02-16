@@ -1,1 +1,1 @@
-﻿ThemeHelper::add_setting_text($wp_customize, "{{id}}", "{{section-id}}", "{{label}}", "{{description}}", {{default-value}});
+ThemeHelper::add_setting_text($wp_customize, "{{id}}", "{{section-id}}", "{{label}}", "{{description}}", {{default-value}});

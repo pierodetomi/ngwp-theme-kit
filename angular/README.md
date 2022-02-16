@@ -90,7 +90,7 @@ For example, here is the content of the ```themeconfig.json``` of the [**Demo Th
 ## Adding the Custom Build Script to ```package.json```
 The last step is to modify the ```package.json``` file in order to add the scripts that will bundle up your WordPress theme.
 
-Add the following script to the ```package.json``` file inside your Angular project:
+Edit the ```build``` script inside the ```package.json``` file of your Angular project:
 
 ```json
 {
@@ -99,7 +99,7 @@ Add the following script to the ```package.json``` file inside your Angular proj
   "scripts": {
     ...
 
-    "build-theme": "ng build && \"./node_modules/ngwp-theme-kit/bin/NgWP.ThemeBuilder.exe\" {{dist-path}} {{path-to-themeconfig.json}}",
+    "build": "ng build && \"./node_modules/ngwp-theme-kit/bin/NgWP.ThemeBuilder.exe\" {{dist-path}} {{path-to-themeconfig.json}}",
     
     ...
   }
@@ -161,7 +161,7 @@ To do this you'll need to install & test your theme directly into WordPress (ple
 In order to build your theme and make it ready for WordPress, you just need to run the command that you previously added to ```package.json``` file:
 
 ```bash
-npm run build-theme
+npm run build
 ```
 
 However, you can rename this script as you like. You know... it's only an npm script after all.

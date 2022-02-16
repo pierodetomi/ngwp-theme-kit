@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\inc\api\custom-endpoints.php" />
     <None Remove="Resources\inc\helpers\request-helper.php" />
     <None Remove="Resources\inc\helpers\theme-helper.php" />
     <None Remove="Resources\screenshot.png" />
@@ -19,6 +20,10 @@
     <None Remove="Templates\functions\add-theme-feature-entry.php" />
     <None Remove="Templates\index\index.php" />
     <None Remove="Templates\index\script-src-entry.php" />
+    <None Remove="Templates\options\options.php" />
+    <None Remove="Templates\options\section-entry.php" />
+    <None Remove="Templates\options\set-setting-value-js-entry.js" />
+    <None Remove="Templates\options\setting-text-entry.php" />
     <None Remove="Templates\style\style.css" />
   </ItemGroup>
 
@@ -27,6 +32,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Resources\inc\api\custom-endpoints.php">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\inc\helpers\request-helper.php">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -47,6 +55,10 @@
     <EmbeddedResource Include="Templates\functions\functions.php" />
     <EmbeddedResource Include="Templates\index\script-src-entry.php" />
     <EmbeddedResource Include="Templates\index\index.php" />
+    <EmbeddedResource Include="Templates\options\set-setting-value-js-entry.js" />
+    <EmbeddedResource Include="Templates\options\setting-text-entry.php" />
+    <EmbeddedResource Include="Templates\options\section-entry.php" />
+    <EmbeddedResource Include="Templates\options\options.php" />
     <EmbeddedResource Include="Templates\style\style.css" />
     <EmbeddedResource Include="Theme.cs" />
   </ItemGroup>

@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
+
 import { IImageAttachment } from '../models/image-attachment.interface';
 import { BaseService } from './base.service';
 import { WpConfigurationService } from './wp-configuration.service';
@@ -10,7 +11,7 @@ import { WpConfigurationService } from './wp-configuration.service';
 })
 export class ThemeSettingsService extends BaseService {
   public get endpointPath(): string {
-    return '/?mode=ngwp_api&api_method=get_setting';
+    return '/wp-json/ngwp';
   }
 
   constructor(private _http: HttpClient, wpConfigurationService: WpConfigurationService) {
@@ -18,7 +19,7 @@ export class ThemeSettingsService extends BaseService {
   }
 
   public get<T>(name: string, defaultValue: string = null, ...additionalParams: { key: string, value: string }[]): Observable<T> {
-    let url = `${this.baseUrl}&name=${encodeURIComponent(name)}`;
+    let url = `${this.baseUrl}/theme-setting?name=${encodeURIComponent(name)}`;
 
     if (defaultValue?.length > 0) {
       url = `${url}&default=${encodeURIComponent(defaultValue)}`;
