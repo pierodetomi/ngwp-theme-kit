@@ -26,8 +26,6 @@ namespace NgWP.ThemeBuilder
 
         public void Build(BuildThemeParameters parameters)
         {
-            // using var scope = new ConsoleHiddenScope();
-
             if (!CheckInputParameters(parameters))
                 return;
 
