@@ -5,8 +5,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 } // Exit if accessed directly
 
 add_action("rest_api_init", function() {
-    register_rest_route("ngwp", "/theme-setting/", array("methods" => "GET", "callback" => "get_theme_setting"));
-    register_rest_route("ngwp", "/theme-setting/", array("methods" => "POST", "callback" => "set_theme_setting"));
+    register_rest_route("ngwp", "/theme-settings/", array("methods" => "GET", "callback" => "get_theme_setting"));
+    register_rest_route("ngwp", "/theme-settings/", array("methods" => "POST", "callback" => "set_theme_setting"));
+    register_rest_route("ngwp", "/theme-menus/", array("methods" => "GET", "callback" => "get_theme_menu"));
 });
 
 function get_theme_setting() {
@@ -49,6 +50,19 @@ function set_theme_setting() {
         }
     
     ok($json);
+}
+
+function get_theme_menu() {
+    $location = htmlspecialchars($_GET["location"]);
+    $locations = get_nav_menu_locations();
+    
+    $menu_id = $locations[$location];
+    $menu_items = wp_get_nav_menu_items($menu_id);
+
+    $menu = wp_get_nav_menu_object($menu_id);
+    $menu->items = $menu_items ?: [];
+    
+    ok($menu);
 }
 
 function ok($data) {

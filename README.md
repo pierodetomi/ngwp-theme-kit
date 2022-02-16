@@ -44,10 +44,69 @@ import { NgwpThemeKitModule } from 'ngwp-theme-kit';
 })
 ```
 
-# Adding build scripts to package.json
+## Adding a ```themeconfig.json``` Configuration File
+This is the configuration file that the custom build tool will use to generate the WordPress theme.
+
+Here you specify some key information about your theme (such as its ```name```, ```author``` and a ```description```) along with supported **theme features** (e.g. ```post-thumbnails```) and the **customizer options**.
+
+For example, here is the content of the [```themeconfig.json```](https://github.com/pierodetomi/ngwp-theme-kit/blob/master/angular/demo-theme/themeconfig.json) of the [**Demo Theme**](https://github.com/pierodetomi/ngwp-theme-kit/tree/master/angular/demo-theme) sample application that you can find in the repository of the library:
+
+```json
+{
+  "name": "Demo Theme",
+  "description": "A WordPress template developed with Angular frontend",
+  "author": "Piero De Tomi",
+  "themeFeatures": [
+    "menus"
+  ],
+  "menus": [{
+    "location": "header-menu",
+    "description": "Header",
+    "initialName": "Header Menu",
+    "initialEntries": [ "Home", "Blog", "About Us", "Privacy" ],
+    "onlyRegisterLocation": false
+  },{
+    "location": "footer-menu",
+    "description": "Footer",
+    "initialName": "Footer Menu",
+    "initialEntries": [ "Footer Item 1", "Footer Item 2", "Footer Item 3", "Footer Item 4" ],
+    "onlyRegisterLocation": false
+  },{
+    "location": "sidebar-menu",
+    "description": "Sidebar Menu",
+    "onlyRegisterLocation": true
+  }],
+  "sections": [{
+    "id": "main",
+    "name": "Main Config",
+    "description": "Main configuration parameters",
+    "settings": [{
+      "id": "title",
+      "label": "Title",
+      "description": "The title of this blog",
+      "defaultValue": null,
+      "controlType": "text"
+    },{
+      "id": "author",
+      "label": "Author",
+      "description": "The author of this blog",
+      "defaultValue": null,
+      "controlType": "text"
+    },{
+      "id": "logo",
+      "label": "Logo",
+      "description": "The website logo",
+      "defaultValue": null,
+      "controlType": "image"
+    }]
+  }]
+}
+```
+
+## Adding the Custom Build Script to ```package.json```
 The last step is to modify the ```package.json``` file in order to add the scripts that will bundle up your WordPress theme.
 
-Add the following script to the ```package.json``` file inside your Angular project:
+Edit the ```build``` script inside the ```package.json``` file of your Angular project:
 
 ```json
 {
@@ -56,7 +115,7 @@ Add the following script to the ```package.json``` file inside your Angular proj
   "scripts": {
     ...
 
-    "build-theme": "ng build && \"./node_modules/ngwp-theme-kit/bin/NgWP.ThemeBuilder.exe\" {{dist-path}}",
+    "build": "ng build && \"./node_modules/ngwp-theme-kit/bin/NgWP.ThemeBuilder.exe\" {{dist-path}} {{path-to-themeconfig.json}}",
     
     ...
   }
@@ -65,7 +124,9 @@ Add the following script to the ```package.json``` file inside your Angular proj
 }
 ```
 
-Here you'll have to replace the ```{{dist-path}}``` token with your actual application's dist path (usually ```dist/<application name>```).
+Here you'll have to replace:
+- The ```{{dist-path}}``` token with your actual application's dist path (usually ```dist/<application name>```)
+- The ```{{path-to-themeconfig.json}}``` token with the actual file path of your ```themeconfig.json``` configuration file
 
 ## Develop the theme
 Now you can develop your Wordpress theme using Angular, just as you would develop any other Angular application.
@@ -116,7 +177,7 @@ To do this you'll need to install & test your theme directly into WordPress (ple
 In order to build your theme and make it ready for WordPress, you just need to run the command that you previously added to ```package.json``` file:
 
 ```bash
-npm run build-theme
+npm run build
 ```
 
 However, you can rename this script as you like. You know... it's only an npm script after all.

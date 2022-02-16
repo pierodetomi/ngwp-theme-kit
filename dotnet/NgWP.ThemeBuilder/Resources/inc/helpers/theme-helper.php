@@ -93,4 +93,30 @@ class ThemeHelper {
 
         $wp_customize->add_control($imgControl);
     }
+
+    public static function create_menu_if_not_existing($name, $location, $entries) {
+        // Check if the menu exists
+        $is_menu_existing = wp_get_nav_menu_object($name);
+
+        if ($is_menu_existing) {
+            return;
+        }
+ 
+        // If it doesn't exist, let's create it.
+        $menu_id = wp_create_nav_menu($name);
+
+        // Set up default menu items
+        foreach ($entries as $entry) {
+            wp_update_nav_menu_item($menu_id, 0, array(
+                "menu-item-title"   =>  __($entry, "textdomain"),
+                "menu-item-url"     => "#",
+                "menu-item-status"  => "publish"
+            ));
+        }
+
+        // Set menu location
+        $locations = get_theme_mod("nav_menu_locations");
+        $locations[$location] = $menu_id;
+        set_theme_mod("nav_menu_locations", $locations);
+    }
 }

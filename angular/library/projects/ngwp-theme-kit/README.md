@@ -49,7 +49,7 @@ This is the configuration file that the custom build tool will use to generate t
 
 Here you specify some key information about your theme (such as its ```name```, ```author``` and a ```description```) along with supported **theme features** (e.g. ```post-thumbnails```) and the **customizer options**.
 
-For example, here is the content of the ```themeconfig.json``` of the [**Demo Theme**](https://github.com/pierodetomi/ngwp-theme-kit/tree/master/angular/demo-theme) sample application that you can find in the [**GitHub repository**](https://github.com/pierodetomi/ngwp-theme-kit) of the library:
+For example, here is the content of the [```themeconfig.json```](https://github.com/pierodetomi/ngwp-theme-kit/blob/master/angular/demo-theme/themeconfig.json) of the [**Demo Theme**](https://github.com/pierodetomi/ngwp-theme-kit/tree/master/angular/demo-theme) sample application that you can find in the repository of the library:
 
 ```json
 {
@@ -57,9 +57,25 @@ For example, here is the content of the ```themeconfig.json``` of the [**Demo Th
   "description": "A WordPress template developed with Angular frontend",
   "author": "Piero De Tomi",
   "themeFeatures": [
-    "title-tag",
-    "post-thumbnails"
+    "menus"
   ],
+  "menus": [{
+    "location": "header-menu",
+    "description": "Header",
+    "initialName": "Header Menu",
+    "initialEntries": [ "Home", "Blog", "About Us", "Privacy" ],
+    "onlyRegisterLocation": false
+  },{
+    "location": "footer-menu",
+    "description": "Footer",
+    "initialName": "Footer Menu",
+    "initialEntries": [ "Footer Item 1", "Footer Item 2", "Footer Item 3", "Footer Item 4" ],
+    "onlyRegisterLocation": false
+  },{
+    "location": "sidebar-menu",
+    "description": "Sidebar Menu",
+    "onlyRegisterLocation": true
+  }],
   "sections": [{
     "id": "main",
     "name": "Main Config",

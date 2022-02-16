@@ -3,9 +3,25 @@
   "description": "A WordPress template developed with Angular frontend",
   "author": "Piero De Tomi",
   "themeFeatures": [
-    "title-tag",
-    "post-thumbnails"
+    "menus"
   ],
+  "menus": [{
+    "location": "header-menu",
+    "description": "Header",
+    "initialName": "Header Menu",
+    "initialEntries": [ "Home", "Blog", "About Us", "Privacy" ],
+    "onlyRegisterLocation": false
+  },{
+    "location": "footer-menu",
+    "description": "Footer",
+    "initialName": "Footer Menu",
+    "initialEntries": [ "Footer Item 1", "Footer Item 2", "Footer Item 3", "Footer Item 4" ],
+    "onlyRegisterLocation": false
+  },{
+    "location": "sidebar-menu",
+    "description": "Sidebar Menu",
+    "onlyRegisterLocation": true
+  }],
   "sections": [{
     "id": "main",
     "name": "Main Config",

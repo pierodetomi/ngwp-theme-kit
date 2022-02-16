@@ -1,0 +1,1 @@
+ThemeHelper::create_menu_if_not_existing("{{name}}", "{{location}}", array({{entries}}));

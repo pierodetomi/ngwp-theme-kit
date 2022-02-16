@@ -18,6 +18,9 @@
     <None Remove="Templates\add-txt-setting-entry.php" />
     <None Remove="Templates\functions.php" />
     <None Remove="Templates\functions\add-theme-feature-entry.php" />
+    <None Remove="Templates\functions\menu-creation.php" />
+    <None Remove="Templates\functions\menu-location-entry.php" />
+    <None Remove="Templates\functions\menu-location-registration.php" />
     <None Remove="Templates\index\index.php" />
     <None Remove="Templates\index\script-src-entry.php" />
     <None Remove="Templates\options\options.php" />
@@ -48,6 +51,9 @@
 
   <ItemGroup>
     <EmbeddedResource Include="Templates\functions\add-theme-feature-entry.php" />
+    <EmbeddedResource Include="Templates\functions\menu-creation.php" />
+    <EmbeddedResource Include="Templates\functions\menu-location-registration.php" />
+    <EmbeddedResource Include="Templates\functions\menu-location-entry.php" />
     <EmbeddedResource Include="Templates\functions\add-txt-setting-entry.php" />
     <EmbeddedResource Include="Templates\functions\add-img-setting-entry.php" />
     <EmbeddedResource Include="Templates\functions\add-setting-entry.php" />

@@ -11,5 +11,7 @@
         public List<string> ThemeFeatures { get; set; } = new List<string>();
         
         public List<ThemeSection> Sections { get; set; } = new List<ThemeSection>();
+
+        public List<ThemeMenu> Menus { get; set; } = new List<ThemeMenu>();
     }
 }

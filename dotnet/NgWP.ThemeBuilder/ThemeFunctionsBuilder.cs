@@ -16,6 +16,12 @@ namespace NgWP.ThemeBuilder
 
         private string _addTxtSettingEntryTemplate;
 
+        private string _menuLocationsRegistrationTemplate;
+
+        private string _menuLocationEntryTemplate;
+
+        private string _menuCreationTemplate;
+
         public override string FileName => "functions.php";
 
         public ThemeFunctionsBuilder(ThemeConfiguration configuration) : base(configuration) { }
@@ -27,6 +33,13 @@ namespace NgWP.ThemeBuilder
             var featuresCode = new List<string>();
             var sectionsCode = new List<string>();
             var settingsCode = new List<string>();
+            var menuLocationRegistraionsCode = string.Empty;
+            var menuLocationsCode = new List<string>();
+            var menusCreationCode = new List<string>();
+
+            // Add theme support for menus if they're present in configuration file
+            if (!configuration.ThemeFeatures.Contains("menus") && configuration.Menus.Any())
+                configuration.ThemeFeatures.Add("menus");
 
             configuration.ThemeFeatures.ForEach(feature =>
             {
@@ -43,8 +56,23 @@ namespace NgWP.ThemeBuilder
                 });
             });
 
+            if (configuration.Menus.Any())
+            {
+                configuration.Menus.ForEach(menu =>
+                {
+                    menuLocationsCode.Add(GetMenuLocationEntryCode(menu));
+
+                    if (CanCreateMenuInstance(menu))
+                        menusCreationCode.Add(GetMenuCreationEntryCode(menu));
+                });
+
+                menuLocationRegistraionsCode = GetMenuLocationsCode(menuLocationsCode);
+            }
+
             return _functionsTemplate
                 .Replace("{{theme-support-entries}}", string.Join(Environment.NewLine, featuresCode))
+                .Replace("{{menus-registration-code}}", menuLocationRegistraionsCode)
+                .Replace("{{menus-creation-code}}", string.Join(Environment.NewLine, menusCreationCode))
                 .Replace("{{sections-code}}", string.Join(Environment.NewLine, sectionsCode))
                 .Replace("{{settings-code}}", string.Join(Environment.NewLine, settingsCode));
         }
@@ -59,6 +87,9 @@ namespace NgWP.ThemeBuilder
             _addSettingEntryTemplate = ReadTemplate("functions/add-setting-entry.php");
             _addImgSettingEntryTemplate = ReadTemplate("functions/add-img-setting-entry.php");
             _addTxtSettingEntryTemplate = ReadTemplate("functions/add-txt-setting-entry.php");
+            _menuLocationsRegistrationTemplate = ReadTemplate("functions/menu-location-registration.php");
+            _menuLocationEntryTemplate = ReadTemplate("functions/menu-location-entry.php");
+            _menuCreationTemplate = ReadTemplate("functions/menu-creation.php");
         }
 
         private string GetThemeFeatureEntryCode(string feature)
@@ -101,6 +132,37 @@ namespace NgWP.ThemeBuilder
                     .Replace("{{default-value}}", defaultValue) // TODO: default value handling
                     .Replace("{{control-type}}", setting.ControlType),
             };
+        }
+
+        private string GetMenuLocationEntryCode(ThemeMenu menu)
+        {
+            return _menuLocationEntryTemplate
+                .Replace("{{location}}", menu.Location)
+                .Replace("{{description}}", menu.Description);
+        }
+
+        private string GetMenuLocationsCode(List<string> menuEntriesCode)
+        {
+            return _menuLocationsRegistrationTemplate
+                .Replace("{{theme-menus-code}}", string.Join(",", menuEntriesCode));
+        }
+
+        private bool CanCreateMenuInstance(ThemeMenu menu)
+        {
+            return (
+                !menu.OnlyRegisterLocation &&
+                !string.IsNullOrEmpty(menu.InitialName) &&
+                menu.InitialEntries != null &&
+                menu.InitialEntries.Any()
+            );
+        }
+
+        private string GetMenuCreationEntryCode(ThemeMenu menu)
+        {
+            return _menuCreationTemplate
+                .Replace("{{name}}", menu.InitialName)
+                .Replace("{{location}}", menu.Location)
+                .Replace("{{entries}}", string.Join(",", menu.InitialEntries.Select(_ => $"\"{_}\"")));
         }
     }
 }

@@ -11,7 +11,7 @@ import { WpConfigurationService } from './wp-configuration.service';
 })
 export class ThemeSettingsService extends BaseService {
   public get endpointPath(): string {
-    return '/wp-json/ngwp';
+    return '/wp-json/ngwp/theme-settings';
   }
 
   constructor(private _http: HttpClient, wpConfigurationService: WpConfigurationService) {
@@ -19,7 +19,7 @@ export class ThemeSettingsService extends BaseService {
   }
 
   public get<T>(name: string, defaultValue: string = null, ...additionalParams: { key: string, value: string }[]): Observable<T> {
-    let url = `${this.baseUrl}/theme-setting?name=${encodeURIComponent(name)}`;
+    let url = `${this.baseUrl}?name=${encodeURIComponent(name)}`;
 
     if (defaultValue?.length > 0) {
       url = `${url}&default=${encodeURIComponent(defaultValue)}`;

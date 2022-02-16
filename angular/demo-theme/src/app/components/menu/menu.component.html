@@ -1,0 +1,17 @@
+<ng-container *ngIf="menu?.items?.length > 0">
+  <h3>{{menu.name}}</h3>
+  
+  <ul>
+    <ng-container *ngTemplateOutlet="recursiveMenu; context:{ items: menu.items }"></ng-container>
+  </ul>
+
+  <ng-template #recursiveMenu let-items="items">
+    <li *ngFor="let item of items">
+      <a [href]="item.url">{{item.title}}</a>
+
+      <ul *ngIf="item.children?.length > 0">
+        <ng-container *ngTemplateOutlet="recursiveMenu; context:{ items: item.children }"></ng-container>
+      </ul>
+    </li>
+  </ng-template>
+</ng-container>

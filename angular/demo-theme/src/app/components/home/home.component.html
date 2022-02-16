@@ -1,8 +1,13 @@
-<p>Title:</p>
 <h1>{{title}}</h1>
+
+<app-menu [location]="'header-menu'"></app-menu>
+
+<hr />
 
 <p>Logo:</p>
 <img *ngIf="logo?.src" [src]="logo.src" />
+
+<hr />
 
 <p>Posts in this site:</p>
 <ul>
@@ -11,6 +16,12 @@
   </li>
 </ul>
 
+<hr />
+
 <div>
   <a routerLink="test">Angular router test</a>
 </div>
+
+<hr />
+
+<app-menu [location]="'footer-menu'"></app-menu>

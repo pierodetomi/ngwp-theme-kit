@@ -13,7 +13,14 @@ require_once("options.php");
 
 {{theme-support-entries}}
 
+add_action("init", "register_theme_menus");
 add_action("customize_register", "configure_customizer");
+
+function register_theme_menus() {
+    {{menus-registration-code}}
+
+    {{menus-creation-code}}
+}
 
 function configure_customizer($wp_customize) {
     {{sections-code}}
