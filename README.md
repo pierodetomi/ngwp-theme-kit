@@ -44,6 +44,18 @@ import { NgwpThemeKitModule } from 'ngwp-theme-kit';
 })
 ```
 
+## Configuring page & post templates
+In order to correctly bind to the page & post (single) WordPress templates, you must create to dedicated components: one component that will render the page content and one that will render the post content.
+
+Once you have these two components, you must call the static registration methods provided by the ```NgwpThemeKitModule``` module, as follows:
+
+```Typescript
+NgwpThemeKitModule.setPageTemplate(PageComponent);
+NgwpThemeKitModule.setPostTemplate(PostComponent);
+```
+
+You must do this registration as soon as possible in your application lifecycle. The suggested position is just before the declaration of your application's main module.
+
 ## Adding a ```themeconfig.json``` Configuration File
 This is the configuration file that the custom build tool will use to generate the WordPress theme.
 
