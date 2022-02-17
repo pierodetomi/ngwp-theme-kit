@@ -27,13 +27,19 @@
     {{body-code}}
 
     <script type=""text/javascript"">
+        let isPage = <?php echo (get_post_type() == "page" ? "true" : "false"); ?>;
+        let isPost = <?php echo (get_post_type() == "post" ? "true" : "false"); ?>;
+
         window._wpConfiguration = {
             siteUrl: '<?php echo $siteUrl; ?>',
             auth: {
                 isAuthenticated: <?php if (is_user_logged_in() == 1 || is_user_logged_in() == true) { echo "true"; } else { echo "false"; } ?>,
                 userId: <?php echo $user_id; ?>,
                 nonce: '<?php echo $nonce; ?>'
-            }
+            },
+            isPage: isPage,
+            isPost: isPost,
+            postOrPageId: isPage || isPost ? <?php echo get_the_ID(); ?> : null
         };
     </script>
 

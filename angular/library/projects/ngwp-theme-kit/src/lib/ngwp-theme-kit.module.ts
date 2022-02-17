@@ -1,12 +1,23 @@
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { NgModule } from '@angular/core';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { NgModule, Type } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+
+import { ThemeTemplateHostComponent } from './components/theme-template-host/theme-template-host.component';
+import { ThemeRuntimeConfig } from './config/theme-runtime.config';
 import { WpNonceInterceptor } from './interceptors/wp-nonce.interceptor';
 import { WpUnauthorizedInterceptor } from './interceptors/wp-unauthorized.interceptor';
 
+const catchAll: Routes = [
+  { path: '**', component: ThemeTemplateHostComponent }
+];
+
 @NgModule({
-  declarations: [],
+  declarations: [
+    ThemeTemplateHostComponent
+  ],
   imports: [
-    HttpClientModule
+    HttpClientModule,
+    RouterModule.forRoot(catchAll)
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: WpNonceInterceptor, multi: true },
@@ -14,4 +25,12 @@ import { WpUnauthorizedInterceptor } from './interceptors/wp-unauthorized.interc
   ],
   exports: []
 })
-export class NgwpThemeKitModule { }
+export class NgwpThemeKitModule {
+  public static setPageTemplate(pageTemplateComponent: Type<unknown>) {
+    ThemeRuntimeConfig.pageTemplateComponent = pageTemplateComponent;
+  }
+
+  public static setPostTemplate(postTemplateComponent: Type<unknown>) {
+    ThemeRuntimeConfig.postTemplateComponent = postTemplateComponent;
+  }
+}

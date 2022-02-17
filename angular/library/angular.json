@@ -12,7 +12,7 @@
       "projectType": "library",
       "root": "projects/ngwp-theme-kit",
       "sourceRoot": "projects/ngwp-theme-kit/src",
-      "prefix": "lib",
+      "prefix": "ngwp",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
