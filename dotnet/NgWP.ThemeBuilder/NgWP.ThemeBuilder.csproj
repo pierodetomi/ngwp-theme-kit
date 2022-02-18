@@ -11,6 +11,8 @@
     <None Remove="Resources\inc\api\custom-endpoints.php" />
     <None Remove="Resources\inc\helpers\request-helper.php" />
     <None Remove="Resources\inc\helpers\theme-helper.php" />
+    <None Remove="Resources\js\customizer.js" />
+    <None Remove="Resources\js\wp-customizer.service.js" />
     <None Remove="Resources\screenshot.png" />
     <None Remove="Templates\add-img-setting-entry.php" />
     <None Remove="Templates\add-section-entry.php" />
@@ -42,6 +44,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\inc\helpers\theme-helper.php">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\js\wp-customizer.service.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\js\customizer.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\screenshot.png">

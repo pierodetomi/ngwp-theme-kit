@@ -14,6 +14,10 @@ export class ThemeTemplateHostComponent implements AfterViewInit {
   ) { }
 
   ngAfterViewInit(): void {
+    this._injectComponent();
+  }
+
+  private _injectComponent() {
     const hasPageTemplate = ThemeRuntimeConfig.pageTemplateComponent !== null;
     const hasPostTemplate = ThemeRuntimeConfig.postTemplateComponent !== null;
 

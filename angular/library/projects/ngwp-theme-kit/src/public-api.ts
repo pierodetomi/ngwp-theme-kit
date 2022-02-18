@@ -20,3 +20,6 @@ export * from './lib/services/settings.service';
 export * from './lib/services/theme-settings.service';
 export * from './lib/services/theme-menus.service';
 export * from './lib/services/wp-configuration.service';
+
+// Directives
+export * from './lib/directives/theme-setting.directive';

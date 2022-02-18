@@ -15,6 +15,7 @@ require_once("options.php");
 
 add_action("init", "register_theme_menus");
 add_action("customize_register", "configure_customizer");
+add_action("customize_controls_enqueue_scripts", "register_customizer_js");
 
 function register_theme_menus() {
     {{menus-registration-code}}
@@ -26,4 +27,14 @@ function configure_customizer($wp_customize) {
     {{sections-code}}
     
     {{settings-code}}
+}
+
+function register_customizer_js() {
+    wp_enqueue_script(
+        "custom-customize",
+        get_template_directory_uri()."/js/customizer.js",
+        array("jquery", "customize-controls"),
+        false,
+        true
+    );
 }
