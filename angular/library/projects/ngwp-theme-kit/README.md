@@ -111,7 +111,18 @@ For example, here is the content of the [```themeconfig.json```](https://github.
       "defaultValue": null,
       "controlType": "image"
     }]
-  }]
+  }],
+  "widgetAreas": [{
+      "id": "header-widgets",
+      "name": "Header Widgets",
+      "description": "Widgets that will appear in the header of the page"
+    },
+    {
+      "id": "sidebar-widgets",
+      "name": "Sidebar Widgets",
+      "description": "Widgets that will appear in the sidebar of the website"
+    }
+  ]
 }
 ```
 

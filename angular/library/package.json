@@ -12,7 +12,7 @@
     "copy-bin-to-dist": "xcopy /s /Y \"bin\\\" \"dist\\ngwp-theme-kit\\bin\\\"",
     "build-npm": "npm run lint && ng build && npm run create-dist-bin && npm run copy-bin-to-dist",
     "build-npm-dev": "npm run lint && ng build --configuration development && npm run create-dist-bin && npm run copy-bin-to-dist",
-    "deploy-locally": "npm run build-npm-dev && cd \"dist/ngwp-theme-kit\" && npm pack && cd \"../../../demo-theme\" && npm i \"../library/dist/ngwp-theme-kit/ngwp-theme-kit-0.0.16.tgz\""
+    "deploy-locally": "npm run build-npm-dev && cd \"dist/ngwp-theme-kit\" && npm pack && cd \"../../../demo-theme\" && npm i \"../library/dist/ngwp-theme-kit/ngwp-theme-kit-0.0.17.tgz\""
   },
   "private": true,
   "dependencies": {
