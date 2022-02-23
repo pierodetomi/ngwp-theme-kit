@@ -14,6 +14,7 @@ require_once("options.php");
 {{theme-support-entries}}
 
 add_action("init", "register_theme_menus");
+add_action("widgets_init", "register_widget_areas");
 add_action("customize_register", "configure_customizer");
 add_action("customize_controls_enqueue_scripts", "register_customizer_js");
 
@@ -21,6 +22,10 @@ function register_theme_menus() {
     {{menus-registration-code}}
 
     {{menus-creation-code}}
+}
+
+function register_widget_areas() {
+    {{widget-areas-registration-code}}
 }
 
 function configure_customizer($wp_customize) {

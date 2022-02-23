@@ -8,6 +8,7 @@ add_action("rest_api_init", function() {
     register_rest_route("ngwp", "/theme-settings/", array("methods" => "GET", "callback" => "get_theme_setting"));
     register_rest_route("ngwp", "/theme-settings/", array("methods" => "POST", "callback" => "set_theme_setting"));
     register_rest_route("ngwp", "/theme-menus/", array("methods" => "GET", "callback" => "get_theme_menu"));
+    register_rest_route("ngwp", "/widget-areas/", array("methods" => "GET", "callback" => "get_widget_area"));
 });
 
 function get_theme_setting() {
@@ -63,6 +64,13 @@ function get_theme_menu() {
     $menu->items = $menu_items ?: [];
     
     ok($menu);
+}
+
+function get_widget_area() {
+    $id = htmlspecialchars($_GET["id"]);
+    
+    header("Content-Type: text/html");
+    dynamic_sidebar($id);
 }
 
 function ok($data) {

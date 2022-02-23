@@ -5,6 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ThemeTemplateHostComponent } from './components/theme-template-host/theme-template-host.component';
 import { ThemeRuntimeConfig } from './config/theme-runtime.config';
 import { ThemeSettingDirective } from './directives/theme-setting.directive';
+import { WidgetAreaDirective } from './directives/widget-area.directive';
 import { WpNonceInterceptor } from './interceptors/wp-nonce.interceptor';
 import { WpUnauthorizedInterceptor } from './interceptors/wp-unauthorized.interceptor';
 
@@ -15,7 +16,8 @@ const catchAll: Routes = [
 @NgModule({
   declarations: [
     ThemeTemplateHostComponent,
-    ThemeSettingDirective
+    ThemeSettingDirective,
+    WidgetAreaDirective
   ],
   imports: [
     HttpClientModule,
@@ -26,7 +28,8 @@ const catchAll: Routes = [
     { provide: HTTP_INTERCEPTORS, useClass: WpUnauthorizedInterceptor, multi: true }
   ],
   exports: [
-    ThemeSettingDirective
+    ThemeSettingDirective,
+    WidgetAreaDirective
   ]
 })
 export class NgwpThemeKitModule {

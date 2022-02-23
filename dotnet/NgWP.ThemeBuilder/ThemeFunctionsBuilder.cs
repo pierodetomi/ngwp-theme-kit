@@ -22,6 +22,8 @@ namespace NgWP.ThemeBuilder
 
         private string _menuCreationTemplate;
 
+        private string _widgetAreaRegistrationTemplate;
+
         public override string FileName => "functions.php";
 
         public ThemeFunctionsBuilder(ThemeConfiguration configuration) : base(configuration) { }
@@ -33,9 +35,10 @@ namespace NgWP.ThemeBuilder
             var featuresCode = new List<string>();
             var sectionsCode = new List<string>();
             var settingsCode = new List<string>();
-            var menuLocationRegistraionsCode = string.Empty;
+            var menuLocationRegistrationsCode = string.Empty;
             var menuLocationsCode = new List<string>();
             var menusCreationCode = new List<string>();
+            var widgetAreaRegistrationsCode = new List<string>();
 
             // Add theme support for menus if they're present in configuration file
             if (!configuration.ThemeFeatures.Contains("menus") && configuration.Menus.Any())
@@ -66,13 +69,20 @@ namespace NgWP.ThemeBuilder
                         menusCreationCode.Add(GetMenuCreationEntryCode(menu));
                 });
 
-                menuLocationRegistraionsCode = GetMenuLocationsCode(menuLocationsCode);
+                menuLocationRegistrationsCode = GetMenuLocationsCode(menuLocationsCode);
             }
+
+            if (configuration.WidgetAreas.Any())
+                configuration.WidgetAreas.ForEach(widgetArea =>
+                {
+                    widgetAreaRegistrationsCode.Add(GetWidgetAreaRegistrationCode(widgetArea));
+                });
 
             return _functionsTemplate
                 .Replace("{{theme-support-entries}}", string.Join(Environment.NewLine, featuresCode))
-                .Replace("{{menus-registration-code}}", menuLocationRegistraionsCode)
+                .Replace("{{menus-registration-code}}", menuLocationRegistrationsCode)
                 .Replace("{{menus-creation-code}}", string.Join(Environment.NewLine, menusCreationCode))
+                .Replace("{{widget-areas-registration-code}}", string.Join(Environment.NewLine, widgetAreaRegistrationsCode))
                 .Replace("{{sections-code}}", string.Join(Environment.NewLine, sectionsCode))
                 .Replace("{{settings-code}}", string.Join(Environment.NewLine, settingsCode));
         }
@@ -90,6 +100,7 @@ namespace NgWP.ThemeBuilder
             _menuLocationsRegistrationTemplate = ReadTemplate("functions/menu-location-registration.php");
             _menuLocationEntryTemplate = ReadTemplate("functions/menu-location-entry.php");
             _menuCreationTemplate = ReadTemplate("functions/menu-creation.php");
+            _widgetAreaRegistrationTemplate = ReadTemplate("functions/widget-area-registration.php");
         }
 
         private string GetThemeFeatureEntryCode(string feature)
@@ -163,6 +174,14 @@ namespace NgWP.ThemeBuilder
                 .Replace("{{name}}", menu.InitialName)
                 .Replace("{{location}}", menu.Location)
                 .Replace("{{entries}}", string.Join(",", menu.InitialEntries.Select(_ => $"\"{_}\"")));
+        }
+
+        private string GetWidgetAreaRegistrationCode(ThemeWidgetArea widgetArea)
+        {
+            return _widgetAreaRegistrationTemplate
+                .Replace("{{id}}", widgetArea.Id)
+                .Replace("{{name}}", widgetArea.Name)
+                .Replace("{{description}}", widgetArea.Description);
         }
     }
 }

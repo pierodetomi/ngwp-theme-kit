@@ -13,5 +13,7 @@
         public List<ThemeSection> Sections { get; set; } = new List<ThemeSection>();
 
         public List<ThemeMenu> Menus { get; set; } = new List<ThemeMenu>();
+
+        public List<ThemeWidgetArea> WidgetAreas { get; set; } = new List<ThemeWidgetArea>();
     }
 }
